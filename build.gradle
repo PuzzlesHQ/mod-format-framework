@@ -1,0 +1,70 @@
+plugins {
+    id 'java'
+    id 'maven-publish'
+    id("io.github.sgtsilvio.gradle.maven-central-publishing") version "0.4.0"
+}
+
+group = 'dev.puzzleshq'
+version = '1.0-SNAPSHOT'
+
+repositories {
+    mavenCentral()
+}
+
+java {
+    withJavadocJar()
+    withSourcesJar()
+}
+
+dependencies {
+    implementation 'com.google.code.findbugs:jsr305:3.0.2'
+    implementation "com.github.zafarkhaja:java-semver:0.10.2"
+    
+    implementation "org.hjson:hjson:$hjson_version"
+}
+
+publishing {
+    publications {
+        maven(MavenPublication) {
+            groupId = 'dev.puzzleshq'
+            artifactId = 'mod-format-framework'
+
+            from components.java
+
+            pom {
+                name = "Mod Format Framework"
+                description = "A library of mod-json formats & template classes for puzzle-loader-core."
+                url = "https://github.com/PuzzlesHQ/mod-format-framework"
+
+                licenses {
+                    license {
+                        name = "GNU Lesser General Public License"
+                        url = "https://www.gnu.org/licenses/lgpl-2.1.html"
+                        distribution = "LGPL"
+                        comments = "This project includes LGPL-licensed components."
+                    }
+                }
+
+                developers {
+                    developer {
+                        id = 'mrzombii'
+                        name = 'Mr Zombii'
+                        email = 'thezombiigames@gmail.com'
+                    }
+                }
+                scm {
+                    connection = "https://github.com/PuzzlesHQ/mod-format-framework.git"
+                    developerConnection = "https://github.com/PuzzlesHQ/mod-format-framework.git"
+                    url = "https://github.com/PuzzlesHQ/mod-format-framework"
+                }
+            }
+        }
+    }
+}
+
+wrapper {
+    gradleVersion = "8.5"
+    distributionType = Wrapper.DistributionType.ALL
+}
+
+java.toolchain.languageVersion.set(JavaLanguageVersion.of(17))
