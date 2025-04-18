@@ -4,8 +4,7 @@ plugins {
     id("io.github.sgtsilvio.gradle.maven-central-publishing") version "0.4.0"
 }
 
-group = 'dev.puzzleshq'
-version = '1.0-SNAPSHOT'
+version = '1.0.0'
 
 repositories {
     mavenCentral()
@@ -17,8 +16,8 @@ java {
 }
 
 dependencies {
-    implementation 'com.google.code.findbugs:jsr305:3.0.2'
-    implementation "com.github.zafarkhaja:java-semver:0.10.2"
+    implementation "com.google.code.findbugs:jsr305:$jsr_version"
+    implementation "com.github.zafarkhaja:java-semver:$semver_version"
     
     implementation "org.hjson:hjson:$hjson_version"
 }
@@ -26,15 +25,15 @@ dependencies {
 publishing {
     publications {
         maven(MavenPublication) {
-            groupId = 'dev.puzzleshq'
-            artifactId = 'mod-format-framework'
+            groupId = p_group
+            artifactId = p_id
 
             from components.java
 
             pom {
-                name = "Mod Format Framework"
-                description = "A library of mod-json formats & template classes for puzzle-loader-core."
-                url = "https://github.com/PuzzlesHQ/mod-format-framework"
+                name = p_name
+                description = p_desc
+                url = p_git
 
                 licenses {
                     license {
@@ -53,13 +52,17 @@ publishing {
                     }
                 }
                 scm {
-                    connection = "https://github.com/PuzzlesHQ/mod-format-framework.git"
-                    developerConnection = "https://github.com/PuzzlesHQ/mod-format-framework.git"
-                    url = "https://github.com/PuzzlesHQ/mod-format-framework"
+                    connection = "${p_git}.git"
+                    developerConnection = "${p_git}.git"
+                    url = "${p_git}.git"
                 }
             }
         }
     }
+}
+
+signing {
+    sign(publishing.publications[0])
 }
 
 wrapper {
