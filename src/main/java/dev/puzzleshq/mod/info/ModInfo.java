@@ -98,10 +98,13 @@ public class ModInfo {
         return loadableSides;
     }
 
+    public ModDependency[] getDependencies() {
+        return dependencies;
+    }
+
     public IModFormat getFormat() {
         return format;
     }
-
 
     /**
      * Reads a string to a manipulation file.
