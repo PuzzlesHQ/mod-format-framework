@@ -1,22 +1,22 @@
-package dev.puzzleshq.json.mod.api.format.impl;
+package dev.puzzleshq.mod.api.format.impl;
 
-import dev.puzzleshq.json.mod.util.EntrypointPair;
-import dev.puzzleshq.json.mod.util.MixinConfig;
-import dev.puzzleshq.json.mod.util.ModDependency;
-import dev.puzzleshq.json.mod.api.format.IModFormat;
-import dev.puzzleshq.json.mod.info.ModInfoBuilder;
+import dev.puzzleshq.mod.api.format.IModFormat;
+import dev.puzzleshq.mod.info.ModInfoBuilder;
+import dev.puzzleshq.mod.util.EntrypointPair;
+import dev.puzzleshq.mod.util.MixinConfig;
+import dev.puzzleshq.mod.util.ModDependency;
 import org.hjson.JsonArray;
 import org.hjson.JsonObject;
 import org.hjson.JsonValue;
 
-public class ModFormatV3 implements IModFormat {
+public class ModFormatV2 implements IModFormat {
 
     @Override
     public void parse(ModInfoBuilder builder, JsonObject object) {
         builder.setFormat(this);
 
         builder.setId(object.get("id").asString());
-        builder.setDisplayName(object.getString("display-name", builder.getId()));
+        builder.setDisplayName(object.getString("name", builder.getId()));
         builder.setDescription(object.getString("description", ""));
         builder.setVersion(object.getString("version", "0.0.0"));
 
@@ -55,7 +55,7 @@ public class ModFormatV3 implements IModFormat {
         } catch (Exception ignore) {}
 
         try {
-            JsonObject loadableSides = object.get("can-load-on").asObject();
+            JsonObject loadableSides = object.get("allowedSides").asObject();
             builder.setLoadableSide("client", loadableSides.getBoolean("client", true));
             builder.setLoadableSide("server", loadableSides.getBoolean("server", true));
         } catch (Exception ignore) {
@@ -83,24 +83,24 @@ public class ModFormatV3 implements IModFormat {
                     builder.addDependency(new ModDependency(s, value.asString(), false));
                 } else {
                     JsonObject dependency = value.asObject();
-                    builder.addDependency(new ModDependency(s, dependency.get("ver").asString(), dependency.getBoolean("isOptional", false)));
+                    builder.addDependency(new ModDependency(s, dependency.get("ver").asString(), !dependency.getBoolean("isRequired", true)));
                 }
             }
         } catch (Exception ignore) {}
 
         try {
-            JsonArray accessWriter = object.get("access-writers").asArray();
+            JsonArray accessWriter = object.get("accessTransformers").asArray();
             for (JsonValue v : accessWriter) builder.addAccessWriter(v.asString());
         } catch (Exception ignore) {}
     }
 
     @Override
     public String name() {
-        return "ModJson format v3";
+        return "ModJson format v2";
     }
 
     @Override
     public int spec() {
-        return 3;
+        return 2;
     }
 }

@@ -1,10 +1,10 @@
-package dev.puzzleshq.json.mod.info;
+package dev.puzzleshq.mod.info;
 
-import dev.puzzleshq.json.mod.ModFormats;
-import dev.puzzleshq.json.mod.util.EntrypointPair;
-import dev.puzzleshq.json.mod.util.MixinConfig;
-import dev.puzzleshq.json.mod.util.ModDependency;
-import dev.puzzleshq.json.mod.api.format.IModFormat;
+import dev.puzzleshq.mod.ModFormats;
+import dev.puzzleshq.mod.util.EntrypointPair;
+import dev.puzzleshq.mod.util.MixinConfig;
+import dev.puzzleshq.mod.util.ModDependency;
+import dev.puzzleshq.mod.api.format.IModFormat;
 import org.hjson.JsonObject;
 import org.hjson.JsonValue;
 

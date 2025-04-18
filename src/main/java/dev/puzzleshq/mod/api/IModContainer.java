@@ -1,13 +1,13 @@
-package dev.puzzleshq.json.mod.api;
+package dev.puzzleshq.mod.api;
 
 import com.github.zafarkhaja.semver.Version;
-import dev.puzzleshq.json.mod.info.ModInfo;
+import dev.puzzleshq.mod.info.ModInfo;
 
 // TODO: Document Class
 public interface IModContainer {
 
     String getDisplayName();
-    String getModID();
+    String getID();
     Version getVersion();
 
     ModInfo getInfo();

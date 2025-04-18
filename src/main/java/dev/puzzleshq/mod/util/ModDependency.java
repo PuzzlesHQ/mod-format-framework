@@ -1,7 +1,7 @@
-package dev.puzzleshq.json.mod.util;
+package dev.puzzleshq.mod.util;
 
-import dev.puzzleshq.json.mod.ModFormats;
-import dev.puzzleshq.json.mod.api.IModContainer;
+import dev.puzzleshq.mod.ModFormats;
+import dev.puzzleshq.mod.api.IModContainer;
 
 import javax.annotation.Nullable;
 

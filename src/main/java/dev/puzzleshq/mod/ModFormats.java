@@ -1,8 +1,8 @@
-package dev.puzzleshq.json.mod;
+package dev.puzzleshq.mod;
 
-import dev.puzzleshq.json.mod.api.IModContainer;
-import dev.puzzleshq.json.mod.api.format.IModFormat;
-import dev.puzzleshq.json.mod.api.format.impl.ModFormatV3;
+import dev.puzzleshq.mod.api.IModContainer;
+import dev.puzzleshq.mod.api.format.IModFormat;
+import dev.puzzleshq.mod.api.format.impl.ModFormatV3;
 
 import java.util.HashMap;
 import java.util.Map;

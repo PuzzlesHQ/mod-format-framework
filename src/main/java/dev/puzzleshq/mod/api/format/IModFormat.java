@@ -1,6 +1,6 @@
-package dev.puzzleshq.json.mod.api.format;
+package dev.puzzleshq.mod.api.format;
 
-import dev.puzzleshq.json.mod.info.ModInfoBuilder;
+import dev.puzzleshq.mod.info.ModInfoBuilder;
 import org.hjson.JsonObject;
 
 // TODO: Document Class

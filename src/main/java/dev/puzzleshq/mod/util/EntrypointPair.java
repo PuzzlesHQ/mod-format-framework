@@ -1,4 +1,4 @@
-package dev.puzzleshq.json.mod.util;
+package dev.puzzleshq.mod.util;
 
 // TODO: Document Class
 public record EntrypointPair(

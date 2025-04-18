@@ -1,6 +1,6 @@
-package dev.puzzleshq.json.mod.api;
+package dev.puzzleshq.mod.api;
 
-import dev.puzzleshq.json.mod.util.EntrypointPair;
+import dev.puzzleshq.mod.util.EntrypointPair;
 
 import javax.annotation.Nullable;
 import java.util.Map;
