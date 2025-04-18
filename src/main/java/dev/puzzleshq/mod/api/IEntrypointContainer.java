@@ -7,7 +7,7 @@ import java.util.Map;
 import java.util.function.Consumer;
 
 //TODO: Document Class
-public interface IEntrypointController {
+public interface IEntrypointContainer {
 
     <T> void invoke(String key, Class<T> type, Consumer<? super T> invoker);
 

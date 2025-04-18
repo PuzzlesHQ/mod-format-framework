@@ -15,4 +15,6 @@ public interface IModContainer {
     int getPriority();
     void bumpPriority();
 
+    IEntrypointContainer getEntrypointContainer();
+
 }
