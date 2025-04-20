@@ -11,7 +11,12 @@ import org.hjson.JsonValue;
 import javax.annotation.Nullable;
 import java.util.Map;
 
-//TODO: Document Class
+/**
+ * Represents the mod.json of a mod.
+ *
+ * @since 1.0.0
+ * @author Mr-Zombii
+ */
 public class ModInfo {
 
     private final IModFormat format;
@@ -58,50 +63,94 @@ public class ModInfo {
         this.dependencies = dependencies;
     }
 
+    /**
+     * Gets the mods display name.
+     */
     public String getDisplayName() {
         return displayName;
     }
 
+    /**
+     * Gets the mods ID.
+     */
     public String getId() {
         return id;
     }
 
+    /**
+     * Gets the mods Version.
+     */
     public String getVersion() {
         return version;
     }
 
+    /**
+     * Gets the mods description.
+     */
     public String getDescription() {
         return description;
     }
 
+    /**
+     * Gets the mods authors.
+     * @return an array of strings.
+     */
     public String[] getAuthors() {
         return authors;
     }
 
+    /**
+     * Gets the mods meta data.
+     * @return an {@link Map} of {@link String} and {@link JsonValue}.
+     */
     public Map<String, JsonValue> getMetadata() {
         return metadata;
     }
 
+    /**
+     * Gets the mods entrypoint map.
+     * @return a {@link Map} the key is the entrypoint name and the value is an array of {@link EntrypointPair}.
+     */
     public Map<String, EntrypointPair[]> getEntrypointMap() {
         return entrypointMap;
     }
 
+    /**
+     * Gets the mods mixin configs.
+     * @return an array of {@link MixinConfig}.
+     */
     public MixinConfig[] getMixinConfigs() {
         return mixinConfigs;
     }
 
+    /**
+     * Gets the mods access transformers.
+     * @return an array of {@link String}.
+     */
     public String[] getAccessTransformers() {
         return accessTransformers;
     }
 
+    /**
+     * Gets the sides the mod can be loaded.
+     * @return a {@link Map} the key is the side and the value is a {@link Boolean}
+     */
     public Map<String, Boolean> getLoadableSides() {
         return loadableSides;
     }
 
+    /**
+     * Gets the mods dependencies.
+     * @return an array of {@link ModDependency}
+     */
     public ModDependency[] getDependencies() {
         return dependencies;
     }
 
+    /**
+     * Gets the modInfos format.
+     * @return {@link IModFormat}
+     */
     public IModFormat getFormat() {
         return format;
     }
