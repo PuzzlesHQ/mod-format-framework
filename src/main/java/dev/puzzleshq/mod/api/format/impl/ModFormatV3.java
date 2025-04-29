@@ -13,7 +13,6 @@ public class ModFormatV3 implements IModFormat {
 
     @Override
     public void parse(ModInfoBuilder builder, JsonObject object) {
-        builder.setFormat(this);
 
         builder.setId(object.get("id").asString());
         builder.setDisplayName(object.getString("display-name", builder.getId()));
@@ -62,6 +61,7 @@ public class ModFormatV3 implements IModFormat {
             builder.setLoadableSide("client", true);
             builder.setLoadableSide("server", true);
         }
+        builder.setLoadableSide("unknown", true);
 
         try {
             JsonArray mixins = object.get("mixins").asArray();

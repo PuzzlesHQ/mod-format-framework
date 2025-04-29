@@ -116,7 +116,8 @@ public class ModInfo {
         JsonObject object = JsonObject.readHjson(contents).asObject();
         IModFormat format = ModFormats.getFormat(object.getInt("formatVersion", 3));
         ModInfoBuilder builder = new ModInfoBuilder();
-        format.parse(new ModInfoBuilder(), object);
+        builder.setFormat(format);
+        format.parse(builder, object);
         return builder.build();
     }
 }

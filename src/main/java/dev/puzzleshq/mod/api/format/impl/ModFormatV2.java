@@ -13,8 +13,6 @@ public class ModFormatV2 implements IModFormat {
 
     @Override
     public void parse(ModInfoBuilder builder, JsonObject object) {
-        builder.setFormat(this);
-
         builder.setId(object.get("id").asString());
         builder.setDisplayName(object.getString("name", builder.getId()));
         builder.setDescription(object.getString("description", ""));

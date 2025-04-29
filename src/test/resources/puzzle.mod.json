@@ -1,0 +1,22 @@
+{
+  "formatVersion": 3,
+
+  "display-name": "Example Mod",
+  "id": "surface-ui-network",
+  "version": "1.0.0",
+  "description": "This is an example mod",
+  "authors": [ "Mr-Zombii" ],
+  "can-load-on": {
+    "client": true,
+    "server": true
+  },
+  "mixins": [
+    {
+      "config": "surface-ui-network.mod.json",
+      "environment": "server"
+    }
+  ],
+  "depends": {
+    "puzzle-loader-core": ">=1.0.0"
+  }
+}

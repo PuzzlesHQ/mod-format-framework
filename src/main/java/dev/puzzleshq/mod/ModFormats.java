@@ -15,6 +15,7 @@ public class ModFormats {
     private static final Map<Integer, IModFormat> formatMap = new HashMap<>();
 
     public static void initDefaultFormats() {
+        System.out.println("Initializing default mod formats.");
         register(3, new ModFormatV3());
     }
 
