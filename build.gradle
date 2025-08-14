@@ -31,7 +31,7 @@ java {
 
 dependencies {
     implementation "com.google.code.findbugs:jsr305:$jsr_version"
-    implementation "com.github.zafarkhaja:java-semver:$semver_version"
+    implementation "com.github.villadora:semver:$semver_version"
 
     implementation "org.hjson:hjson:$hjson_version"
 }

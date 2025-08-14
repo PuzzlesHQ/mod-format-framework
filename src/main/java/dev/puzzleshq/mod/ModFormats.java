@@ -2,6 +2,7 @@ package dev.puzzleshq.mod;
 
 import dev.puzzleshq.mod.api.IModContainer;
 import dev.puzzleshq.mod.api.format.IModFormat;
+import dev.puzzleshq.mod.api.format.impl.ModFormatV2;
 import dev.puzzleshq.mod.api.format.impl.ModFormatV3;
 
 import java.util.HashMap;
@@ -24,6 +25,7 @@ public class ModFormats {
      */
     public static void initDefaultFormats() {
         System.out.println("Initializing default mod formats.");
+        register(2, new ModFormatV2());
         register(3, new ModFormatV3());
     }
 

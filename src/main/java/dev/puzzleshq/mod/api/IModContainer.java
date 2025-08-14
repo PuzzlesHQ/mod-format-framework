@@ -1,6 +1,6 @@
 package dev.puzzleshq.mod.api;
 
-import com.github.zafarkhaja.semver.Version;
+import com.github.villadora.semver.Version;
 import dev.puzzleshq.mod.info.ModInfo;
 
 /**
@@ -25,6 +25,11 @@ public interface IModContainer {
      * Gets the version.
      */
     Version getVersion();
+
+    /**
+     * Gets the version string.
+     */
+    Version getVersionStr();
 
     /**
      * Gets the mod info.

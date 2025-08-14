@@ -1,5 +1,7 @@
 package dev.puzzleshq.mod.util;
 
+import com.github.villadora.semver.SemVer;
+import com.github.villadora.semver.ranges.Range;
 import dev.puzzleshq.mod.ModFormats;
 import dev.puzzleshq.mod.api.IModContainer;
 
@@ -14,7 +16,8 @@ import javax.annotation.Nullable;
 public class ModDependency {
 
     private final String modID;
-    private final String constraint;
+    private final String constraintStr;
+    private final Range constraint;
     private final boolean isOptional;
 
     public ModDependency(
@@ -23,7 +26,8 @@ public class ModDependency {
             boolean isOptional
     ) {
         this.modID = modId;
-        this.constraint = constraint;
+        this.constraint = Range.valueOf(constraint);
+        this.constraintStr = constraint;
         this.isOptional = isOptional;
     }
 
@@ -41,14 +45,21 @@ public class ModDependency {
     public boolean hasCompatibleVersion() {
         IModContainer container = getContainer();
         if (container == null) return false;
-        return container.getVersion().satisfies(constraint);
+        return SemVer.satisfies(container.getVersion(), getConstraint());
     }
 
     /**
      * Gets the version constraints.
      */
-    public String getConstraint() {
+    public Range getConstraint() {
         return constraint;
+    }
+
+    /**
+     * Gets the version constraints as a string.
+     */
+    public String getConstraintStr() {
+        return constraintStr;
     }
 
     /**
