@@ -29,7 +29,7 @@ public interface IModContainer {
     /**
      * Gets the version string.
      */
-    Version getVersionStr();
+    String getVersionStr();
 
     /**
      * Gets the mod info.
