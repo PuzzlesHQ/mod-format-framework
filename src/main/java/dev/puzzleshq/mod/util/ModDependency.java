@@ -25,6 +25,8 @@ public class ModDependency {
             String constraint,
             boolean isOptional
     ) {
+        constraint = constraint.replaceAll("\\+.*", "");
+
         this.modID = modId;
         this.constraint = Range.valueOf(constraint);
         this.constraintStr = constraint;
