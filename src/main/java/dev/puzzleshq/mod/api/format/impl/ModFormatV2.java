@@ -21,12 +21,16 @@ public class ModFormatV2 implements IModFormat {
         try {
             JsonArray authors = object.get("authors").asArray();
             for (JsonValue v : authors) builder.addAuthor(v.asString());
-        } catch (Exception ignore) {}
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
 
         try {
             JsonObject meta = object.get("meta").asObject();
             for (String s : meta.names()) builder.addMeta(s, meta.get(s));
-        } catch (Exception ignore) {}
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
 
         try {
             JsonObject entrypoints = object.get("entrypoints").asObject();
@@ -50,7 +54,9 @@ public class ModFormatV2 implements IModFormat {
                     builder.addEntrypoint(s, new EntrypointPair(entrypoint.get("value").asString(), entrypoint.get("adapter").asString()));
                 }
             }
-        } catch (Exception ignore) {}
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
 
         try {
             JsonObject loadableSides = object.get("allowedSides").asObject();
@@ -71,7 +77,9 @@ public class ModFormatV2 implements IModFormat {
                     builder.addMixinConfig(new MixinConfig(mixin.get("config").asString(), mixin.get("environment").asString()));
                 }
             }
-        } catch (Exception ignore) {}
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
 
         try {
             JsonObject dependencies = object.get("depends").asObject();
@@ -84,12 +92,16 @@ public class ModFormatV2 implements IModFormat {
                     builder.addDependency(new ModDependency(s, dependency.get("ver").asString(), !dependency.getBoolean("isRequired", true)));
                 }
             }
-        } catch (Exception ignore) {}
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
 
         try {
             JsonArray accessWriter = object.get("accessTransformers").asArray();
             for (JsonValue v : accessWriter) builder.addAccessWriter(v.asString());
-        } catch (Exception ignore) {}
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
     }
 
     @Override
