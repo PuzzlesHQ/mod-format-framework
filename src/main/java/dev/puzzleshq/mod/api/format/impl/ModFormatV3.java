@@ -5,7 +5,6 @@ import dev.puzzleshq.mod.util.MixinConfig;
 import dev.puzzleshq.mod.util.ModDependency;
 import dev.puzzleshq.mod.api.format.IModFormat;
 import dev.puzzleshq.mod.info.ModInfoBuilder;
-import jdk.vm.ci.meta.JavaValue;
 import org.hjson.JsonArray;
 import org.hjson.JsonObject;
 import org.hjson.JsonValue;
