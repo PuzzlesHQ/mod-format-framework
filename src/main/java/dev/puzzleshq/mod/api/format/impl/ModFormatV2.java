@@ -19,39 +19,46 @@ public class ModFormatV2 implements IModFormat {
         builder.setVersion(object.getString("version", "0.0.0"));
 
         try {
-            JsonArray authors = object.get("authors").asArray();
-            for (JsonValue v : authors) builder.addAuthor(v.asString());
+            JsonValue authors = object.get("authors");
+            if (authors != null)
+                for (JsonValue v : authors.asArray()) builder.addAuthor(v.asString());
         } catch (Exception e) {
             throw new RuntimeException(e);
         }
 
         try {
-            JsonObject meta = object.get("meta").asObject();
-            for (String s : meta.names()) builder.addMeta(s, meta.get(s));
+            JsonValue metaValue = object.get("meta");
+            if (metaValue != null) {
+                JsonObject meta = metaValue.asObject();
+                for (String s : meta.names()) builder.addMeta(s, meta.get(s));
+            }
         } catch (Exception e) {
             throw new RuntimeException(e);
         }
 
         try {
-            JsonObject entrypoints = object.get("entrypoints").asObject();
-            for (String s : entrypoints.names()) {
-                JsonValue value = entrypoints.get(s);
-                if (value.isString()) {
-                    builder.addEntrypoint(s, new EntrypointPair(value.asString(), "java"));
-                    continue;
-                }
-                if (value.isObject()) {
-                    JsonObject entrypoint = value.asObject();
-                    builder.addEntrypoint(s, new EntrypointPair(entrypoint.get("value").asString(), entrypoint.get("adapter").asString()));
-                    continue;
-                }
-                for (JsonValue v : value.asArray()) {
-                    if (v.isString()) {
-                        builder.addEntrypoint(s, new EntrypointPair(v.asString(), "java"));
+            JsonValue entrypointsValue = object.get("entrypoints");
+            if (entrypointsValue != null) {
+                JsonObject entrypoints = entrypointsValue.asObject();
+                for (String s : entrypoints.names()) {
+                    JsonValue value = entrypoints.get(s);
+                    if (value.isString()) {
+                        builder.addEntrypoint(s, new EntrypointPair(value.asString(), "java"));
                         continue;
                     }
-                    JsonObject entrypoint = v.asObject();
-                    builder.addEntrypoint(s, new EntrypointPair(entrypoint.get("value").asString(), entrypoint.get("adapter").asString()));
+                    if (value.isObject()) {
+                        JsonObject entrypoint = value.asObject();
+                        builder.addEntrypoint(s, new EntrypointPair(entrypoint.get("value").asString(), entrypoint.get("adapter").asString()));
+                        continue;
+                    }
+                    for (JsonValue v : value.asArray()) {
+                        if (v.isString()) {
+                            builder.addEntrypoint(s, new EntrypointPair(v.asString(), "java"));
+                            continue;
+                        }
+                        JsonObject entrypoint = v.asObject();
+                        builder.addEntrypoint(s, new EntrypointPair(entrypoint.get("value").asString(), entrypoint.get("adapter").asString()));
+                    }
                 }
             }
         } catch (Exception e) {
@@ -66,15 +73,19 @@ public class ModFormatV2 implements IModFormat {
             builder.setLoadableSide("client", true);
             builder.setLoadableSide("server", true);
         }
+        builder.setLoadableSide("unknown", true);
 
         try {
-            JsonArray mixins = object.get("mixins").asArray();
-            for (JsonValue value : mixins) {
-                if (!value.isObject()) {
-                    builder.addMixinConfig(new MixinConfig(value.asString(), "unknown"));
-                } else {
-                    JsonObject mixin = value.asObject();
-                    builder.addMixinConfig(new MixinConfig(mixin.get("config").asString(), mixin.get("environment").asString()));
+            JsonValue mixinsValue = object.get("mixins");
+            if (mixinsValue != null) {
+                JsonArray mixins = mixinsValue.asArray();
+                for (JsonValue value : mixins) {
+                    if (!value.isObject()) {
+                        builder.addMixinConfig(new MixinConfig(value.asString(), "unknown"));
+                    } else {
+                        JsonObject mixin = value.asObject();
+                        builder.addMixinConfig(new MixinConfig(mixin.get("config").asString(), mixin.get("environment").asString()));
+                    }
                 }
             }
         } catch (Exception e) {
@@ -82,14 +93,17 @@ public class ModFormatV2 implements IModFormat {
         }
 
         try {
-            JsonObject dependencies = object.get("depends").asObject();
-            for (String s : dependencies.names()) {
-                JsonValue value = dependencies.get(s);
-                if (!value.isObject()) {
-                    builder.addDependency(new ModDependency(s, value.asString(), false));
-                } else {
-                    JsonObject dependency = value.asObject();
-                    builder.addDependency(new ModDependency(s, dependency.get("ver").asString(), !dependency.getBoolean("isRequired", true)));
+            JsonValue dependenciesValue = object.get("depends");
+            if (dependenciesValue != null) {
+                JsonObject dependencies = dependenciesValue.asObject();
+                for (String s : dependencies.names()) {
+                    JsonValue value = dependencies.get(s);
+                    if (!value.isObject()) {
+                        builder.addDependency(new ModDependency(s, value.asString(), false));
+                    } else {
+                        JsonObject dependency = value.asObject();
+                        builder.addDependency(new ModDependency(s, dependency.get("ver").asString(), dependency.getBoolean("isOptional", false)));
+                    }
                 }
             }
         } catch (Exception e) {
@@ -97,11 +111,15 @@ public class ModFormatV2 implements IModFormat {
         }
 
         try {
-            JsonArray accessWriter = object.get("accessTransformers").asArray();
-            for (JsonValue v : accessWriter) builder.addAccessWriter(v.asString());
+            JsonValue accessWriterValue = object.get("accessTransformers");
+            if (accessWriterValue != null) {
+                JsonArray accessWriter = accessWriterValue.asArray();
+                for (JsonValue v : accessWriter) builder.addAccessWriter(v.asString());
+            }
         } catch (Exception e) {
             throw new RuntimeException(e);
         }
+
     }
 
     @Override
