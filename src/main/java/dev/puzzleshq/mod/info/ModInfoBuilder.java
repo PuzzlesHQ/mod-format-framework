@@ -172,13 +172,13 @@ public class ModInfoBuilder {
                 id,
                 version,
                 description,
-                authors.toArray(String[]::new),
+                authors.toArray(new String[0]),
                 metadata,
                 ModInfoBuilder.buildMap(entrypointMap),
-                mixinConfigs.toArray(MixinConfig[]::new),
-                accessWriters.toArray(String[]::new),
+                mixinConfigs.toArray(new MixinConfig[0]),
+                accessWriters.toArray(new String[0]),
                 loadableSides,
-                dependencies.toArray(ModDependency[]::new)
+                dependencies.toArray(new ModDependency[0])
         );
     }
 
