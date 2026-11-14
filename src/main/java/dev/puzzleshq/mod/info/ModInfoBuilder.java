@@ -4,6 +4,7 @@ import dev.puzzleshq.mod.util.EntrypointPair;
 import dev.puzzleshq.mod.util.MixinConfig;
 import dev.puzzleshq.mod.util.ModDependency;
 import dev.puzzleshq.mod.api.format.IModFormat;
+import java.util.Arrays;
 import org.hjson.JsonValue;
 
 import javax.annotation.Nullable;
@@ -83,7 +84,7 @@ public class ModInfoBuilder {
      * @param author the author to add.
      */
     public void addAuthor(String... author) {
-        this.authors.addAll(List.of(author));
+        this.authors.addAll(Arrays.asList(author));
     }
 
     /**
