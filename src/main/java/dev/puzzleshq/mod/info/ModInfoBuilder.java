@@ -186,7 +186,7 @@ public class ModInfoBuilder {
         Map<String, EntrypointPair[]> map = new HashMap<>();
 
         for (Map.Entry<String, List<EntrypointPair>> entry : entrypointIndexMap.entrySet()) {
-            map.put(entry.getKey(), entry.getValue().toArray(EntrypointPair[]::new));
+            map.put(entry.getKey(), entry.getValue().toArray(new EntrypointPair[0]));
         }
 
         return map;
